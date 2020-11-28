@@ -1,11 +1,22 @@
 import './App.css'
+import Container from '@material-ui/core/Container'
+import Home from './components/Home'
+import Login from './components/Login'
+import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
+    console.log(props)
     return (
-        <div className="App">
-            <h2>Hoi</h2>
+        <div>
+            <Container>{ props.state.appReducer.isSignedIn ? <Home /> : <Login />}</Container>
         </div>
     )
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        state: state,
+    }
+}
+
+export default connect(mapStateToProps)(App)

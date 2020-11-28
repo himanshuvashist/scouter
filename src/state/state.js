@@ -1,1 +1,1 @@
-export const appState = {}
+export const appState = {isSignedIn:false}
