@@ -5,7 +5,6 @@ import Login from './components/Login'
 import {connect} from 'react-redux'
 
 function App(props) {
-    console.log(props)
     return (
         <div>
             <Container>{ props.state.appReducer.isSignedIn ? <Home /> : <Login />}</Container>
