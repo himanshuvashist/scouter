@@ -12,6 +12,7 @@ import { updateDetailState } from './../../actions/form/updateDetailState'
 import { updateNameState } from './../../actions/form/updateNameState'
 import { updateDateState } from './../../actions/form/updateDateState'
 import NegativeFeedback from './NegativeFeedback'
+import Paper from '@material-ui/core/Paper'
 
 export function Form(props) {
     const [openPF, setOpenPF] = useState(false)
@@ -60,32 +61,34 @@ export function Form(props) {
     }
     return (
         <div className="form">
-            <Grid container spacing={1} justify="center" alignItems="center">
-                <Grid item xs={12} sm={6}>
-                    <NameInput
-                        errorStatus={nameErrorStatus}
-                        updateErrorStatus={updateNameErrorStatus}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <CalanderInput />
-                </Grid>
-                <Grid item xs={12}>
-                    <DetailInput
-                        errorStatus={detailErrorStatus}
-                        updateErrorStatus={updateDetialErrorStatus}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container justify="space-around">
-                        <Button variant="outlined" color="secondary" onClick={handleSubmit}>
-                            Submit
-                        </Button>
+            <Paper elevation={3} className="boxy">
+                <Grid container spacing={1} justify="center" alignItems="center">
+                    <Grid item xs={12} sm={6}>
+                        <NameInput
+                            errorStatus={nameErrorStatus}
+                            updateErrorStatus={updateNameErrorStatus}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <CalanderInput />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <DetailInput
+                            errorStatus={detailErrorStatus}
+                            updateErrorStatus={updateDetialErrorStatus}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid container justify="space-around">
+                            <Button variant="outlined" color="secondary" onClick={handleSubmit}>
+                                Submit
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            <PositiveFeedback open={openPF} handleClose={handlePFeedbackClose} />
-            <NegativeFeedback open={openNF} handleClose={handleNFeedbackClose} />
+                <PositiveFeedback open={openPF} handleClose={handlePFeedbackClose} />
+                <NegativeFeedback open={openNF} handleClose={handleNFeedbackClose} />
+            </Paper>
         </div>
     )
 }
