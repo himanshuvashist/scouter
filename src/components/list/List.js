@@ -1,7 +1,9 @@
+import Tablee from './Tablee'
+
 export default function List() {
     return (
         <div>
-            This is list here.
+            <Tablee />
         </div>
     )
 }

@@ -28,7 +28,7 @@ export function NameInput(props) {
             <div className={classes.margin}>
                 <Grid container spacing={1} alignItems="flex-end">
                     <Grid item>
-                        <AccountCircle />
+                        <AccountCircle color="primary"/>
                     </Grid>
                     <Grid item>
                         <TextField
