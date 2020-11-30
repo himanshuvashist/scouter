@@ -8,7 +8,6 @@ import { updateDateState } from './../../actions/form/updateDateState'
 
 export function CalanderInput(props) {
     const handleDateChange = (date) => {
-        console.log(date)
         props.updateState(date)
     }
 

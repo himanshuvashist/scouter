@@ -41,7 +41,6 @@ export function Form(props) {
                     detail: props.state.formInfo.detail,
                 })
                 .then(function (docRef) {
-                    console.log('Document written with ID: ', docRef.id)
                     props.updateNameState('')
                     props.updateDetailState('')
                     setOpenPF(true)
