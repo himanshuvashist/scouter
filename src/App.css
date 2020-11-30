@@ -41,14 +41,19 @@
   margin-top:18vh;
 }
 
-.form{
+/* .form{
   margin-top:10vh;
 }
 
 .table{
   margin-top:10vh;
-}
+} */
 
 .boxy{
   padding:50px 0;
+}
+
+.logoutButton{
+  margin-top:35px;
+  margin-bottom:35px;
 }
