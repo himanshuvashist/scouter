@@ -41,7 +41,7 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell align="center">{row.date}</TableCell>
+                <TableCell align="center">{row.date.toDate().toUTCString()}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -69,9 +69,38 @@ Row.propTypes = {
 export default class Tablee extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            data: [],
-            rows: [],
+        this.state = { rows: [] }
+        this.ms = this.ms.bind(this)
+        this.merge = this.merge.bind(this)
+    }
+    // merge
+    merge(array, start, center, end) {
+        let leftArray = array.slice(start, center + 1)
+        let rightArray = array.slice(center + 1, end + 1)
+        leftArray.push({ date: Number.MIN_VALUE })
+        rightArray.push({ date: Number.MIN_VALUE })
+        let l = 0
+        let r = 0
+        for (let i = start; i <= end; i++) {
+            if (leftArray[l].date >= rightArray[r].date) {
+                array[i] = leftArray[l]
+                l++
+            } else {
+                array[i] = rightArray[r]
+                r++
+            }
+        }
+    }
+    // merge sort
+    ms = (array, start, end) => {
+        if (start < end) {
+            const center = Math.floor((start + end) / 2)
+            this.ms(array, start, center)
+            this.ms(array, center + 1, end)
+            // merge
+            this.merge(array, start, center, end)
+        } else {
+            return
         }
     }
     componentDidMount() {
@@ -83,21 +112,9 @@ export default class Tablee extends React.Component {
                 querySnapshot.forEach((doc) => {
                     d.push({ ...doc.data(), id: doc.id })
                 })
-                this.setState({ data: d }, () => {
-                    const temp = []
-                    this.state.data.forEach((e) => {
-                        temp.push({
-                            name: e.name,
-                            date: e.date.seconds,
-                            detail: e.detail,
-                            id: e.id,
-                        })
-                    })
-                    // ##TODO## sort temp in respect of latest to oldest date
-
-                    // update state
-                    this.setState({ rows: temp })
-                })
+                // Merge-sort algo
+                this.ms(d, 0, d.length - 1)
+                this.setState({ rows: d })
             })
             .catch((err) => {
                 console.log(err)
